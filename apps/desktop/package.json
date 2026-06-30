@@ -1,0 +1,22 @@
+{
+  "name": "open-agent-ide-desktop",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@open-agent-ide/shared": "workspace:*",
+    "@open-agent-ide/core": "workspace:*",
+    "electron": "^39.5.1"
+  },
+  "devDependencies": {
+    "electron-vite": "^3.1.0",
+    "typescript": "^5.5.0",
+    "vite": "^6.0.0"
+  }
+}
