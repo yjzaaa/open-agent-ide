@@ -5,3 +5,8 @@ dist/
 .DS_Store
 coverage/
 *.tsbuildinfo
+
+# Claude / orchestrator state
+.claude/
+.autoclaw/
+.superpowers/
