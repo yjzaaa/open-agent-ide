@@ -10,3 +10,6 @@ coverage/
 .claude/
 .autoclaw/
 .superpowers/
+
+# GitNexus index
+.gitnexus/

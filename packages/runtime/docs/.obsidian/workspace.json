@@ -1,0 +1,208 @@
+{
+  "main": {
+    "id": "b6f8c27ef2cf3998",
+    "type": "split",
+    "children": [
+      {
+        "id": "32ae10fdccd9ebe6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "28cde7da71222d2e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "architecture-build-system.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "architecture-build-system"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "dfecf6ee607b3f7c",
+    "type": "split",
+    "children": [
+      {
+        "id": "723e89eec6e03623",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "94ab5349c891d76c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "7e1595357b539a24",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "b760bd05aa300a29",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "4026708a37457e97",
+    "type": "split",
+    "children": [
+      {
+        "id": "28befe89094766cc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "66235b30cf62abf1",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "architecture.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "architecture 的反向链接列表"
+            }
+          },
+          {
+            "id": "048626066ac63799",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "architecture.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "architecture 的出链列表"
+            }
+          },
+          {
+            "id": "445ae1169d3eca50",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "4bac1c720866f6a0",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "54d6c727436dbc1b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "architecture.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "architecture 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "94ab5349c891d76c",
+  "lastOpenFiles": [
+    "architecture-services.md",
+    "architecture.md",
+    "diagrams/overall-architecture.excalidraw",
+    "diagrams/overall-architecture.excalidraw.tmp.15288.1775766238311",
+    "diagrams/entry-startup-flow.excalidraw",
+    "diagrams/mcp-protocol.excalidraw",
+    "diagrams/mcp-protocol.excalidraw.tmp.15288.1775755454683",
+    "diagrams/entry-startup-flow.txt",
+    "architecture-bridge.md",
+    "architecture-build-system.md",
+    "architecture-entry-startup.md",
+    "architecture-state-management.md",
+    "architecture-tools-system.md",
+    "architecture-query-engine.md",
+    "diagrams/services-layer.excalidraw.tmp.15288.1775754864856",
+    "diagrams/services-layer.excalidraw",
+    "未命名.base",
+    "diagrams/tools-system.excalidraw",
+    "architecture-mcp.md"
+  ]
+}

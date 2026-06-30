@@ -1,0 +1,102 @@
+# Entry & Startup Flow Diagram
+
+## Text-Based Flow Representation
+
+User runs 'claude'
+    |
+    v
+Parse args[] in cli.tsx
+    |
+    +---> --version/-v? [FAST PATH] ---> Output MACRO.VERSION (<1ms) ---> EXIT
+    |
+    +---> Special flag? [FAST PATH]
+            |
+            +---> --dump-system-prompt? ---> Load config/model/prompt ---> Output prompt ---> EXIT
+            |
+            +---> --claude-in-chrome-mcp? ---> runClaudeInChromeMcpServer() ---> EXIT
+            |
+            +---> --chrome-native-host? ---> runChromeNativeHost() ---> EXIT
+            |
+            +---> --computer-use-mcp? [CHICAGO_MCP] ---> runComputerUseMcpServer() ---> EXIT
+            |
+            +---> --daemon-worker? [DAEMON] ---> runDaemonWorker() (lean, no config) ---> EXIT
+            |
+            +---> remote-control/rc/remote/sync/bridge? [BRIDGE_MODE]
+            |       |
+            |       +---> Check auth
+            |       +---> Check GrowthBook gate
+            |       +---> Check version
+            |       +---> Check policy limits
+            |       +---> bridgeMain() ---> EXIT
+            |
+            +---> daemon? [DAEMON] ---> enableConfigs() ---> initSinks() ---> daemonMain() ---> EXIT
+            |
+            +---> ps/logs/attach/kill/--bg? [BG_SESSIONS] ---> enableConfigs() ---> bg handler ---> EXIT
+            |
+            +---> new/list/reply? [TEMPLATES] ---> templatesMain() ---> process.exit(0) ---> EXIT
+            |
+            +---> environment-runner? [BYOC_ENVIRONMENT_RUNNER] ---> environmentRunnerMain() ---> EXIT
+            |
+            +---> self-hosted-runner? [SELF_HOSTED_RUNNER] ---> selfHostedRunnerMain() ---> EXIT
+            |
+            +---> --worktree + --tmux? ---> enableConfigs() ---> execIntoTmuxWorktree() ---> EXIT
+    |
+    v
+[MAIN PATH] No match
+    |
+    v
+startCapturingEarlyInput()
+    |
+    v
+Load main.tsx
+    |
+    v
+Call init() [memoized]
+    |
+    +---> enableConfigs()
+    +---> applySafeConfigEnvironmentVariables()
+    +---> applyExtraCACertsFromConfig() (before any TLS!)
+    +---> setupGracefulShutdown()
+    +---> populateOAuthAccountInfoIfNeeded() [async]
+    +---> initJetBrainsDetection() [async]
+    +---> detectCurrentRepository() [async]
+    +---> initializeRemoteManagedSettingsLoadingPromise() [async]
+    +---> initializePolicyLimitsLoadingPromise() [async]
+    +---> configureGlobalMTLS()
+    +---> configureGlobalAgents()
+    +---> preconnectAnthropicApi() [parallel with init work]
+    +---> initUpstreamProxy() [CCR only]
+    +---> setShellIfWindows()
+    +---> registerCleanup() [LSP, teams]
+    +---> ensureScratchpadDir()
+    |
+    v
+Init Complete (~45-60ms)
+    |
+    v
+Load REPL.tsx
+    |
+    v
+Interactive CLI Ready
+
+## Color Coding
+
+- Blue (#a5d8ff): Fast paths that exit early
+- Yellow (#ffd43b): Main CLI path  
+- Green (#b2f2bb): Init steps
+
+## Performance Notes
+
+- --version: < 1ms
+- Fast paths: 10-50ms
+- Init sequence: 45-60ms
+- Full CLI startup: ~200ms
+
+## Key Design Decisions
+
+1. Zero imports for --version: MACRO.VERSION is build-time injected
+2. Dynamic imports everywhere: Minimize module evaluation
+3. Parallel pre-fetch: API preconnect overlaps with init work
+4. Memoized init(): Ensure single execution
+5. Early input capture: Start capturing before CLI loads
+6. Feature gates: Build-time dead code elimination via feature()
