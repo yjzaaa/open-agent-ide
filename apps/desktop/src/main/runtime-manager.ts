@@ -1,6 +1,6 @@
 import { spawn, type ChildProcess } from 'child_process'
 import { resolve } from 'path'
-import type { RuntimeReadyEvent, RuntimeEvent } from '@open-agent-ide/shared'
+import type { RuntimeReadyEvent, RuntimeEvent, RuntimeRequest } from '@open-agent-ide/shared'
 
 /**
  * Runtime 管理器
@@ -16,19 +16,12 @@ export class RuntimeManager {
   /**
    * 启动 runtime 子进程
    */
-  start(runtimeEntryPath?: string): void {
+  start(runtimeEntryPath: string): void {
     if (this.child) {
       throw new Error('Runtime 已经启动')
     }
 
-    const entry =
-      runtimeEntryPath ??
-      resolve(
-        import.meta.dir,
-        '../../../packages/runtime/src/interfaces/stdio-server.ts',
-      )
-
-    this.child = spawn('bun', [entry], {
+    this.child = spawn('bun', [runtimeEntryPath], {
       stdio: ['pipe', 'pipe', 'inherit'],
     })
 
@@ -41,6 +34,17 @@ export class RuntimeManager {
       console.log(`Runtime 进程退出，退出码: ${code}`)
       this.child = null
     })
+  }
+
+  /**
+   * 发送 NDJSON 请求到 runtime 子进程
+   */
+  sendRequest(request: RuntimeRequest): void {
+    if (!this.child || !this.child.stdin) {
+      throw new Error('Runtime 未启动')
+    }
+
+    this.child.stdin.write(JSON.stringify(request) + '\n')
   }
 
   /**
