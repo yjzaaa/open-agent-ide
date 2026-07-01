@@ -1,12 +1,14 @@
 {
   "name": "open-agent-ide-desktop",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "private": true,
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "RUNTIME_ENTRY_PATH=../../packages/runtime/src/interfaces/stdio-server.ts electron-vite dev",
     "build": "electron-vite build",
+    "dist": "electron-builder",
+    "dist:fast": "electron-builder --dir",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
   },
@@ -29,6 +31,7 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.5",
     "@types/uuid": "^10.0.0",
+    "electron-builder": "^25.1.8",
     "electron-vite": "^3.1.0",
     "typescript": "^5.5.0",
     "vite": "^6.0.0"

@@ -1,0 +1,26 @@
+appId: com.yjzaaa.open-agent-ide
+productName: Open Agent IDE
+copyright: Copyright © 2026 yjzaaa
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist/**/*
+  - package.json
+  - '!node_modules/**'
+  - '!**/*.test.ts'
+  - '!**/*.test.tsx'
+  - '!**/tests/**'
+mac:
+  category: public.app-category.developer-tools
+  target:
+    - dmg
+win:
+  target:
+    - nsis
+linux:
+  target:
+    - AppImage
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 使用文档
+    url: https://github.com/yjzaaa/open-agent-ide/blob/main/docs/getting-started.md
+    about: 快速开始、安装与配置指南
+  - name: 讨论区
+    url: https://github.com/yjzaaa/open-agent-ide/discussions
+    about: 提问、分享想法或非 bug 的功能讨论
