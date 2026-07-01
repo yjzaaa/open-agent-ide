@@ -20,7 +20,7 @@ export interface RuntimeReadyEvent {
 }
 
 /** runtime 请求方法 */
-export type RuntimeMethod = 'agent.run' | 'agent.stop'
+export type RuntimeMethod = 'agent.run' | 'agent.stop' | 'permission.respond'
 
 /** runtime 请求 */
 export interface RuntimeRequest<T = unknown> {
@@ -28,6 +28,29 @@ export interface RuntimeRequest<T = unknown> {
   id: string
   method: RuntimeMethod
   params: T
+}
+
+/** 权限模式 */
+export type PermissionMode = 'safe' | 'ask' | 'allow-all'
+
+/** Agent 运行请求参数 */
+export interface AgentRunParams {
+  id: string
+  messages: Array<{ role: 'user' | 'assistant'; content: string }>
+  tools?: string[]
+  model: string
+  providerId: string
+  workspace?: string
+  permissionMode?: PermissionMode
+  apiKey: string
+  baseUrl?: string
+}
+
+/** 权限响应参数 */
+export interface PermissionRespondParams {
+  requestId: string
+  decision: 'allow' | 'deny'
+  duration?: 'once' | 'session' | 'always'
 }
 
 /** 通用事件基础 */
@@ -58,6 +81,27 @@ export interface ToolResultEvent extends RuntimeEventBase {
   success: boolean
 }
 
+/** 思考增量事件 */
+export interface ThinkingDeltaEvent extends RuntimeEventBase {
+  type: 'thinking_delta'
+  content: string
+}
+
+/** 权限请求事件 */
+export interface PermissionRequestEvent extends RuntimeEventBase {
+  type: 'permission_request'
+  requestId: string
+  tool: string
+  input: unknown
+}
+
+/** 权限结果事件 */
+export interface PermissionResultEvent extends RuntimeEventBase {
+  type: 'permission_result'
+  requestId: string
+  decision: 'allow' | 'deny'
+}
+
 /** 完成事件 */
 export interface DoneEvent extends RuntimeEventBase {
   type: 'done'
@@ -74,7 +118,10 @@ export interface RuntimeErrorEvent extends RuntimeEventBase {
 export type RuntimeEvent =
   | RuntimeReadyEvent
   | TextDeltaEvent
+  | ThinkingDeltaEvent
   | ToolStartEvent
   | ToolResultEvent
+  | PermissionRequestEvent
+  | PermissionResultEvent
   | DoneEvent
   | RuntimeErrorEvent

@@ -1,6 +1,6 @@
 {
   "name": "@open-agent-ide/runtime",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Open Agent IDE runtime, derived from free-code-main.",
   "type": "module",
